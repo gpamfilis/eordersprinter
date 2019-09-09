@@ -8,7 +8,8 @@ from constants import *
 # Adapt to your needs
 
 def order_setup(order_id):
-    p = Usb(0x471, 0x55, 0, 0x82, 0x2)
+    # p = Usb(0x471, 0x55, 0, 0x82, 0x2)
+    p = Usb(0x1d6b, 0x2, 0, 0x82, 0x2)
 
     # p.device.read(p.in_ep, 1)
 
@@ -73,7 +74,6 @@ def checkout_setup(checkout_id):
     print('response', res_json)
     items = res_json[0]
     print(items)
-
 
     p.set(align='center', text_type='B', width=3, height=3)
     p.text('CHECKOUT'+"\n")
