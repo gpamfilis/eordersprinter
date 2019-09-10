@@ -38,7 +38,7 @@ def order_setup(order_id):
     p.text(items['datetime']+"\n")
 
     for item in items['items']:
-        item_name =myconverter.convert(item['name'])[0]
+        item_name = myconverter.convert(item['name'])[0]
 
         p.set(align='left', text_type='B', width=2, height=1)
         # p.text(str(item['quantity'])+'X '+item['name']+'\n')
@@ -50,14 +50,19 @@ def order_setup(order_id):
         if comment =='':
             pass
         else:
-            p.text('COMMENTS: '+item['comments'] + "\n")
+            comment_name = myconverter.convert(item['comments'])[0]
+
+            # p.text('COMMENTS: '+item['comments'] + "\n")
+            p.text('COMMENTS: ' + comment_name + "\n")
 
         p.set(align='center', text_type='normal', width=2, height=1)
 
         for content in item['contents']:
             if content['changed'] == 1:
                 if content['default'] == 0:
-                    p.text('WITH   '+content['content_name']+'\n')
+                    content_name = myconverter.convert(content['content_name'])[0]
+
+                    p.text('WITH   '+content_name+'\n')
 
     p.text('\n\n\n\n\n\n\n\n\n\n\n\n')
     p.cut()
@@ -65,13 +70,13 @@ def order_setup(order_id):
     # RT_STATUS_ONLINE = RT_STATUS + b'\x01'
     # RT_STATUS_PAPER = RT_STATUS + b'\x04'
     # p.barcode()
-    method_list = [func for func in dir(p) if callable(getattr(p, func))]
+    # method_list = [func for func in dir(p) if callable(getattr(p, func))]
     # print('device: ', p.query_status(PAPER_FULL_CUT))
     # print('device: ', p.query_status(PAPER_FULL_CUT))
-    e = "\x10\x04\x04"
+    # e = "\x10\x04\x04"
     # p.device.write(p.out_ep, RT_STATUS_PAPER)
-    print('device: ', )
-    print('device: ', )
+    # print('device: ', )
+    # print('device: ', )
     # print('device: ', p._raw(RT_STATUS_ONLINE))
     # print('device: ', p._read())
     p.close()
@@ -80,6 +85,7 @@ def order_setup(order_id):
 
 def checkout_setup(checkout_id):
     p = Usb(0x471, 0x55, 0, 0x82, 0x02)
+    myconverter = Converter(max_expansions=4)
 
     # p.device.read(p.in_ep, 1)
 
@@ -99,7 +105,7 @@ def checkout_setup(checkout_id):
 
     for item in items['items']:
         p.set(align='left', text_type='B', width=2, height=1)
-        p.text(str(item['quantity']) + 'x  '+ item['name']+'\n')
+        p.text(str(item['quantity']) + 'x  '+ myconverter.convert(item['name'])[0]+'\n')
         p.set(align='right', text_type='B', width=1, height=1)
         p.text(str(item['quantity']) + ' x '+str(item['cost']) + '  sub total: ' + str(item['total_item_cost']) + '$' + '\n')
         # comment = item['comments']
