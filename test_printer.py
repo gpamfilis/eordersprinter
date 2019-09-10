@@ -10,7 +10,7 @@ p = Usb(0x471, 0x55, 0, 0x82, 0x2)
 
 
 p.set(align='center', text_type='B', width=3, height=3)
-p.text('NEW ORDER'+"\n")
+p.text('NEW ORDER' + "\n")
 
 p.text('\n\n\n\n\n\n\n\n\n\n\n\n')
 p.cut()
