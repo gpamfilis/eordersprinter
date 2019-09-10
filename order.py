@@ -2,6 +2,7 @@ import requests
 import json
 import time
 from escpos.printer import Usb
+
 from constants import *
 
 
@@ -65,7 +66,7 @@ def order_setup(order_id):
 
 
 def checkout_setup(checkout_id):
-    p = Usb(0x471, 0x55, 0, 0x82, 0x2)
+    p = Usb(0x471, 0x55, 0, 0x82, 0x02)
 
     # p.device.read(p.in_ep, 1)
 
