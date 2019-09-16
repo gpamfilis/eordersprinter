@@ -1,7 +1,7 @@
 # e
 # import sys
 # sys.setdefaultencoding('utf8')
-
+# https://askubuntu.com/questions/3299/how-to-run-cron-job-when-network-is-up
 import requests
 import json
 import time
@@ -28,7 +28,7 @@ def order_setup(order_id):
     res_json = json.loads(res.text)
     items = res_json['items']
     print(items)
-
+    total_cost = 0
     p.set(align='center', text_type='B', width=3, height=3)
     p.text('NEW ORDER'+"\n")
 
@@ -40,6 +40,7 @@ def order_setup(order_id):
     p.text(items['datetime']+"\n")
 
     for item in items['items']:
+        total_cost+=item['total_cost']
         item_name = myconverter.convert(item['name'])[0]
 
         p.set(align='left', text_type='B', width=2, height=1)
@@ -47,15 +48,6 @@ def order_setup(order_id):
         p.text(str(item['quantity'])+'X '+item_name+'\n')
         comment = item['comments']
 
-        p.set(align='right', text_type='normal', width=1, height=1)
-        print(comment)
-        if comment =='':
-            pass
-        else:
-            comment_name = myconverter.convert(item['comments'])[0]
-
-            # p.text('COMMENTS: '+item['comments'] + "\n")
-            p.text('COMMENTS: ' + comment_name + "\n")
 
         p.set(align='center', text_type='normal', width=2, height=1)
 
@@ -64,9 +56,22 @@ def order_setup(order_id):
                 if content['default'] == 0:
                     content_name = myconverter.convert(content['content_name'])[0]
 
-                    p.text('WITH   '+content_name+'\n')
+                    p.text('ME   '+content_name+'\n')
 
-    p.text('\n\n\n\n\n\n\n\n\n\n\n\n')
+        p.set(align='right', text_type='normal', width=1, height=1)
+        print(comment)
+        if comment == '':
+            pass
+        else:
+            comment_name = myconverter.convert(item['comments'])[0]
+
+            # p.text('COMMENTS: '+item['comments'] + "\n")
+            p.text('COMMENTS: ' + comment_name + "\n")
+    p.set(align='center', text_type='B', width=3, height=3)
+    p.text('\n')
+
+    p.text('TOTAL: '+str(total_cost)+"\n")
+    p.text('\n')
     p.cut()
     # RT_STATUS = DLE + EOT
     # RT_STATUS_ONLINE = RT_STATUS + b'\x01'
@@ -167,17 +172,17 @@ while True:
                 print('deleting')
                 res_delete = requests.delete('http://www.e-orders.org/api/v1/mobile/printerorders?order_id={0}'.format(order_id))
 
-    #     for checkout_id in checkout_ids:
-    #         checkout_ids = list_checkouts()[:]
-    #         # print(order_ids)
-    #         print(checkout_id)
-    #         time.sleep(1)
-    #         try:
-    #             checkout_setup(checkout_id)
-    #             res_pos = requests.post('http://www.e-orders.org/api/printer/checkout-print?checkout_id={0}'.format(checkout_id))
-    #             print('responce', res_pos)
-    #         except Exception as e:
-    #             print(e)
+        # for checkout_id in checkout_ids:
+        #     checkout_ids = list_checkouts()[:]
+        #     # print(order_ids)
+        #     print(checkout_id)
+        #     time.sleep(1)
+        #     try:
+        #         checkout_setup(checkout_id)
+        #         res_pos = requests.post('http://www.e-orders.org/api/printer/checkout-print?checkout_id={0}'.format(checkout_id))
+        #         print('responce', res_pos)
+        #     except Exception as e:
+        #         print(e)
     except Exception as e:
         print(e)
 
