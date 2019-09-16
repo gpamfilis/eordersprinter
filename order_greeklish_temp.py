@@ -33,7 +33,9 @@ def order_setup(order_id):
     p.text('NEW ORDER'+"\n")
 
     p.set(align='center', text_type='B', width=2, height=2)
-    p.text(items['items'][0]['table_name']+"\n")
+    table_name = myconverter.convert(items['items'][0]['table_name'])[0]
+
+    p.text(table_name+"\n")
     p.set(align='center', text_type='normal', width=1, height=1)
     p.text(items['datetime']+"\n")
 
