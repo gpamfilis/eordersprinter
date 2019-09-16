@@ -146,9 +146,9 @@ def list_checkouts(store_id=1):
 while True:
     try:
         order_ids = list_orders()[:]
-        checkout_ids = list_checkouts()[:]
+        # checkout_ids = list_checkouts()[:]
         print('orders: ', order_ids)
-        print('checkouts: ', checkout_ids)
+        # print('checkouts: ', checkout_ids)
         time.sleep(5)
 
         for order_id in order_ids:
@@ -165,17 +165,17 @@ while True:
                 print('deleting')
                 res_delete = requests.delete('http://www.e-orders.org/api/v1/mobile/printerorders?order_id={0}'.format(order_id))
 
-        for checkout_id in checkout_ids:
-            checkout_ids = list_checkouts()[:]
-            # print(order_ids)
-            print(checkout_id)
-            time.sleep(1)
-            try:
-                checkout_setup(checkout_id)
-                res_pos = requests.post('http://www.e-orders.org/api/printer/checkout-print?checkout_id={0}'.format(checkout_id))
-                print('responce', res_pos)
-            except Exception as e:
-                print(e)
+    #     for checkout_id in checkout_ids:
+    #         checkout_ids = list_checkouts()[:]
+    #         # print(order_ids)
+    #         print(checkout_id)
+    #         time.sleep(1)
+    #         try:
+    #             checkout_setup(checkout_id)
+    #             res_pos = requests.post('http://www.e-orders.org/api/printer/checkout-print?checkout_id={0}'.format(checkout_id))
+    #             print('responce', res_pos)
+    #         except Exception as e:
+    #             print(e)
     except Exception as e:
         print(e)
 
