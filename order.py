@@ -45,7 +45,7 @@ def order_setup(order_id):
         p.text(str(item['quantity'])+'X '+item_name+'\n')
         comment = item['comments']
 
-        p.set(align='right', text_type='normal', width=1, height=1)
+        p.set(align='center', text_type='normal', width=1, height=1)
         print(comment)
         if comment =='':
             pass
@@ -140,10 +140,10 @@ def list_checkouts(store_id=1):
 while True:
     try:
         order_ids = list_orders()[:]
-        checkout_ids = list_checkouts()[:]
+        # checkout_ids = list_checkouts()[:]
         print('orders: ', order_ids)
-        print('checkouts: ', checkout_ids)
-        time.sleep(5)
+        # print('checkouts: ', checkout_ids)
+        time.sleep(2)
 
         for order_id in order_ids:
             order_ids = list_orders()[:]
@@ -159,17 +159,17 @@ while True:
                 print('deleting')
                 res_delete = requests.delete('http://www.e-orders.org/api/v1/mobile/printerorders?order_id={0}'.format(order_id))
 
-        for checkout_id in checkout_ids:
-            checkout_ids = list_checkouts()[:]
-            # print(order_ids)
-            print(checkout_id)
-            time.sleep(1)
-            try:
-                checkout_setup(checkout_id)
-                res_pos = requests.post('http://www.e-orders.org/api/printer/checkout-print?checkout_id={0}'.format(checkout_id))
-                print('responce', res_pos)
-            except Exception as e:
-                print(e)
+        # for checkout_id in checkout_ids:
+        #     checkout_ids = list_checkouts()[:]
+        #     # print(order_ids)
+        #     print(checkout_id)
+        #     time.sleep(1)
+        #     try:
+        #         checkout_setup(checkout_id)
+        #         res_pos = requests.post('http://www.e-orders.org/api/printer/checkout-print?checkout_id={0}'.format(checkout_id))
+        #         print('responce', res_pos)
+        #     except Exception as e:
+        #         print(e)
     except Exception as e:
         print(e)
 

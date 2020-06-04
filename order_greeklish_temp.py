@@ -2,6 +2,8 @@
 # import sys
 # sys.setdefaultencoding('utf8')
 # https://askubuntu.com/questions/3299/how-to-run-cron-job-when-network-is-up
+# https://stackoverflow.com/questions/11706215/how-to-fix-git-error-object-file-is-empty
+# https://unix.stackexchange.com/questions/57852/crontab-job-start-1-min-after-reboot
 import requests
 import json
 import time
@@ -11,7 +13,7 @@ from greeklish.converter import Converter
 
 from escpos.constants import CHARCODE_GREEK
 # Adapt to your needs
-
+# todo: Beep when new order comes in
 def order_setup(order_id):
     myconverter = Converter(max_expansions=4)
 
