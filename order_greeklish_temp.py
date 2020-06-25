@@ -156,11 +156,11 @@ try:
     with open('/home/pi/config.json') as f:
         data = json.load(f)
     store_id = data['store_id']
-
+    print(store_id, type(store_id))
 
     while True:
         try:
-            order_ids = list_orders()[:]
+            order_ids = list_orders(store_id=store_id)[:]
             # checkout_ids = list_checkouts()[:]
             print('orders: ', order_ids)
             # print('checkouts: ', checkout_ids)
