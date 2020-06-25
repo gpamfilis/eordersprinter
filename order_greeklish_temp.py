@@ -154,7 +154,7 @@ def list_checkouts(store_id=1):
 try:
 
     with open('~/config.json') as f:
-    data = json.load(f)
+        data = json.load(f)
     store_id = data['store_id']
 
 
