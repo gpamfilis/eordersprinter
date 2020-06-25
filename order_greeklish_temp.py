@@ -153,7 +153,7 @@ def list_checkouts(store_id=1):
 # order_setup(orders[0])
 try:
 
-    with open('~/config.json') as f:
+    with open('/home/pi/config.json') as f:
         data = json.load(f)
     store_id = data['store_id']
 
