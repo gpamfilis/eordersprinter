@@ -156,7 +156,7 @@ try:
     with open('/home/pi/config.json') as f:
         data = json.load(f)
     store_id = data['store_id']
-    print(store_id, type(store_id))
+    print('retrieving data for store id: ',store_id, type(store_id))
 
     while True:
         try:
