@@ -153,10 +153,10 @@ def list_checkouts(store_id=1):
 # order_setup(orders[0])
 try:
 
-    # with open('/home/pi/config.json') as f:
-    with open('/home/kasper/Desktop/config.json') as f:
-
+    with open('/home/pi/config.json') as f:
+    # with open('/home/kasper/Desktop/config.json') as f:
         data = json.load(f)
+
     store_id = data['store_id']
     print('retrieving data for store id: ',store_id, type(store_id))
 
