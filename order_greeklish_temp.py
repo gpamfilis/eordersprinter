@@ -15,6 +15,7 @@ from escpos.constants import CHARCODE_GREEK
 # Adapt to your needs
 # todo: Beep when new order comes in
 def order_setup(order_id):
+    start = time.time()
     myconverter = Converter(max_expansions=4)
 
     p = Usb(0x471, 0x55, 0, 0x82, 0x2)
@@ -89,6 +90,8 @@ def order_setup(order_id):
     # print('device: ', p._raw(RT_STATUS_ONLINE))
     # print('device: ', p._read())
     p.close()
+    end = time.time()
+    print("Time to print: ",end - start)
 
 
 
@@ -150,6 +153,8 @@ def list_checkouts(store_id=1):
     return res_json['ids']
 
 
+print("hello")
+
 # order_setup(orders[0])
 try:
 
@@ -161,6 +166,8 @@ try:
     print('retrieving data for store id: ',store_id, type(store_id))
 
     while True:
+        start = time.time()
+
         try:
             order_ids = list_orders(store_id=store_id)[:]
             # checkout_ids = list_checkouts()[:]
@@ -181,7 +188,8 @@ try:
                     print(e)
                     print('deleting')
                     res_delete = requests.delete('http://www.e-orders.org/api/v1/mobile/printerorders?order_id={0}'.format(order_id))
-
+            end = time.time()
+            print(end - start)
             # for checkout_id in checkout_ids:
             #     checkout_ids = list_checkouts()[:]
             #     # print(order_ids)
