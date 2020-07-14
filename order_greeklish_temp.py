@@ -32,7 +32,7 @@ def order_setup(order_id):
     items = res_json['items']
     print(items)
     total_cost = 0
-    p.set(align='center', text_type='B', width=3, height=3)
+    p.set(align='center', text_type='B', width=2.5, height=2.5)
     p.text('DELTIO PARAGELIAS'+"\n")
 
     p.set(align='center', text_type='B', width=2, height=2)
@@ -179,7 +179,7 @@ try:
                 order_ids = list_orders(store_id=store_id)[:]
                 # print(order_ids)
                 print(order_id)
-                time.sleep(1)
+                time.sleep(5)
                 try:
                     order_setup(order_id)
                     res_pos = requests.post('http://www.e-orders.org/api/printer/orders-print?order_id={0}'.format(order_id))
