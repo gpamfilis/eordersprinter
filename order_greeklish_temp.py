@@ -32,8 +32,8 @@ def order_setup(order_id):
     items = res_json['items']
     print(items)
     total_cost = 0
-    p.set(align='center', text_type='B', width=2.5, height=2.5)
-    p.text('DELTIO PARAGELIAS'+"\n")
+    p.set(align='center', text_type='B', width=3, height=3)
+    p.text('DELTIO'+"\n")
 
     p.set(align='center', text_type='B', width=2, height=2)
     table_name = myconverter.convert(items['items'][0]['table_name'])[0]
@@ -143,6 +143,7 @@ def list_orders(store_id=1):
         print(res_json)
         return res_json['ids']
     except Exception as e:
+        print("List orders error: ", e)
         return None
 
 def list_checkouts(store_id=1):
