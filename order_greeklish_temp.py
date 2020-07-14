@@ -32,7 +32,7 @@ def order_setup(order_id):
     print(items)
     total_cost = 0
     p.set(align='center', text_type='B', width=3, height=3)
-    p.text('NEW ORDER'+"\n")
+    p.text('DELTIO PARAGELIAS'+"\n")
 
     p.set(align='center', text_type='B', width=2, height=2)
     table_name = myconverter.convert(items['items'][0]['table_name'])[0]
@@ -153,7 +153,9 @@ def list_checkouts(store_id=1):
 # order_setup(orders[0])
 try:
 
-    with open('/home/pi/config.json') as f:
+    # with open('/home/pi/config.json') as f:
+    with open('/home/kasper/Desktop/config.json') as f:
+
         data = json.load(f)
     store_id = data['store_id']
     print('retrieving data for store id: ',store_id, type(store_id))
@@ -164,7 +166,7 @@ try:
             # checkout_ids = list_checkouts()[:]
             print('orders: ', order_ids)
             # print('checkouts: ', checkout_ids)
-            time.sleep(5)
+            time.sleep(1)
 
             for order_id in order_ids:
                 order_ids = list_orders(store_id=store_id)[:]
